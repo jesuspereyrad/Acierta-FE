@@ -1,0 +1,26 @@
+.image-container {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-size: cover;
+    background-image: url('../../images/login.jpg');
+}
+
+.image-container h1, .image-container h6 {
+    color: #ffffff;
+}
+
+
+.ac-btn-link {
+    color: #0eb0f1;
+    background-color: transparent !important;
+}
+
+.ac-btn {
+    background-color: #0eb0f1 !important;
+    color: white;
+    text-transform: uppercase;
+    border-radius: 25px;
+}
