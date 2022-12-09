@@ -1,7 +1,10 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 # Acierta-FE
 Acierta Frontend
 =======
+=======
+>>>>>>> be21d33 (added initial commit)
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
@@ -72,4 +75,11 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+<<<<<<< HEAD
 >>>>>>> 1f02e7b (Initialize project using Create React App)
+=======
+=======
+# Acierta-FE
+Acierta Frontend
+>>>>>>> 18e5e61 (Initial commit)
+>>>>>>> be21d33 (added initial commit)
