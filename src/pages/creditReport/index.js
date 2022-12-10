@@ -25,13 +25,15 @@ const CreditReport = () =>  {
         .then(res => res.json())
         .then(json_res => setData(json_res))
 
-        // fetch('https://dataportal.jce.gob.do/idcons//IndividualDataHandler.aspx?ServiceID=8a3f2c97-b12b-405a-aa28-5066eae07253&ID1=402&ID2=0050804&ID3=8', 
-        // {
-        //     headers:{
-        //         "accepts":"application/xml"
-        //     }
-        // })
-        // .then(xmlText => {
+        fetch('https://dataportal.jce.gob.do/idcons//IndividualDataHandler.aspx?ServiceID=8a3f2c97-b12b-405a-aa28-5066eae07253&ID1=402&ID2=0050804&ID3=8', 
+        {
+            headers:{
+                "accepts":"application/xml"
+            }
+        })
+        .then(xmlText => {
+            console.log("ced data", xmlText)
+        })
         //     const xml = new XMLParser().parseFromString(xmlText);    // Assume xmlText contains the example XML
         //     console.log("xml", xml);
         //     console.log(xml.getElementsByTagName('Name'));
