@@ -41,7 +41,7 @@ const CreditReport = () =>  {
 
             // const data = JSON.parse(convert.xml2json(xml, {compact: true, spaces: 2}))
             // console.log(data)
-        })
+        // })
     }, [])
 
     console.log("Data: ", data)
