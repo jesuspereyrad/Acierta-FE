@@ -27,6 +27,7 @@ const CreditReport = () =>  {
 
         fetch('https://dataportal.jce.gob.do/idcons//IndividualDataHandler.aspx?ServiceID=8a3f2c97-b12b-405a-aa28-5066eae07253&ID1=402&ID2=0050804&ID3=8', 
         {
+            mode: 'no-cors',
             headers:{
                 "accepts":"application/xml"
             }
