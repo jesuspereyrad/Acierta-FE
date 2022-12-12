@@ -10,6 +10,7 @@ import { Button, Col, Container, Form, FormGroup, Nav, Navbar, Row, Spinner, Tab
 // import convert from 'xml-js';
 
 import XMLParser from 'react-xml-parser';
+// import axios from 'axios'
 import { useParams } from 'react-router-dom';
 
 
@@ -25,11 +26,13 @@ const CreditReport = () =>  {
         .then(res => res.json())
         .then(json_res => setData(json_res))
 
-        fetch('https://dataportal.jce.gob.do/idcons//IndividualDataHandler.aspx?ServiceID=8a3f2c97-b12b-405a-aa28-5066eae07253&ID1=402&ID2=0050804&ID3=8', 
+        fetch.get('https://dataportal.jce.gob.do/idcons//IndividualDataHandler.aspx?ServiceID=8a3f2c97-b12b-405a-aa28-5066eae07253&ID1=402&ID2=0050804&ID3=8', 
         {
             mode: 'no-cors',
+            // "Content-Type": 'application/xml; charset=utf-8',
+            // headers: new Headers({'content-type': 'application/json'}),
             headers:{
-                "accepts":"application/xml"
+                'content-type': 'application/xml'
             }
         })
         .then(xmlText => {
