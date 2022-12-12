@@ -34,13 +34,14 @@ const CreditReport = () =>  {
         })
         .then(xmlText => {
             console.log("ced data", xmlText)
+            const xml = new XMLParser().parseFromString(xmlText);    // Assume xmlText contains the example XML
+            console.log("xml", xml);
+            console.log(xml.getElementsByTagName('Name'));
         })
-        //     const xml = new XMLParser().parseFromString(xmlText);    // Assume xmlText contains the example XML
-        //     console.log("xml", xml);
-        //     console.log(xml.getElementsByTagName('Name'));
-        //     // const data = JSON.parse(convert.xml2json(xml, {compact: true, spaces: 2}))
-        //     // console.log(data)
-        // })
+
+            // const data = JSON.parse(convert.xml2json(xml, {compact: true, spaces: 2}))
+            // console.log(data)
+        })
     }, [])
 
     console.log("Data: ", data)
