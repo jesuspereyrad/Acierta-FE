@@ -273,6 +273,12 @@ const CreditReport = () =>  {
                         </tr>
                         </thead>
                         <tbody>
+                            {data['credit_card_dop'].length == 0 && data['credit_card_usd'] == 0 ? (
+                            <tr>
+                                <td rowSpan={10}>No posee tarjetas de credito</td>
+                            </tr>
+                            ) : null
+                            }
                             {data['credit_card_dop'].map(x => (
                                 <tr>
                                     <td>{x.name.toUpperCase()}</td>
