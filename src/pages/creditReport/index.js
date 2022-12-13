@@ -7,12 +7,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faWallet, faChartLine, faLandmark, faArrowTrendDown, faArrowTrendUp, faFileAlt, faPrint } from '@fortawesome/free-solid-svg-icons'
 
 import { Button, Col, Container, Form, FormGroup, Nav, Navbar, Row, Spinner, Table, Toast } from 'react-bootstrap';
-// import convert from 'xml-js';
-
-import XMLParser from 'react-xml-parser';
-// import axios from 'axios'
 import { useParams } from 'react-router-dom';
-
+import QRCode from "react-qr-code";
 
 const CreditReport = () =>  {
     const [username, setUsername] = useState('');
@@ -20,34 +16,21 @@ const CreditReport = () =>  {
     const [error, setError] = useState(false);
     let {cedula} = useParams()
     const [data, setData] = useState({})
+    const [user_data, setUserData] = useState({})
+    const url_path = 'https://www.w3schools.com/xml/note.xml'
 
     useEffect(() => {
         fetch(`https://o1wuua11kg.execute-api.us-east-1.amazonaws.com/DEV/?cedula=${cedula}`, {mode: 'cors'})
         .then(res => res.json())
         .then(json_res => setData(json_res))
 
-        fetch.get('https://dataportal.jce.gob.do/idcons//IndividualDataHandler.aspx?ServiceID=8a3f2c97-b12b-405a-aa28-5066eae07253&ID1=402&ID2=0050804&ID3=8', 
-        {
-            mode: 'no-cors',
-            // "Content-Type": 'application/xml; charset=utf-8',
-            // headers: new Headers({'content-type': 'application/json'}),
-            headers:{
-                'content-type': 'application/xml'
-            }
-        })
-        .then(xmlText => {
-            console.log("ced data", xmlText)
-            const xml = new XMLParser().parseFromString(xmlText);    // Assume xmlText contains the example XML
-            console.log("xml", xml);
-            console.log(xml.getElementsByTagName('Name'));
-        })
-
-            // const data = JSON.parse(convert.xml2json(xml, {compact: true, spaces: 2}))
-            // console.log(data)
-        // })
+        fetch(`https://o1wuua11kg.execute-api.us-east-1.amazonaws.com/DEV/user?cedula=${cedula}`, {mode: 'cors'})
+        .then(res => res.json())
+        .then(json_res => setUserData(json_res))
     }, [])
 
     console.log("Data: ", data)
+    console.log("User Data: ", user_data)
 
     const formatter = new Intl.NumberFormat('en-US', {
         style: 'currency',
@@ -219,15 +202,18 @@ const CreditReport = () =>  {
             </div>
             <Row>
                 <Col lg={4}>
-                    <img src="https://via.placeholder.com/200" />
+                    {/* <img src="https://via.placeholder.com/200" /> */}
+                    <img src={user_data['image']} />
                 </Col>
+
                 <Col lg={8}>
                     <Row>
+                        <h3>{user_data['name']}</h3>
                         <Col lg={6}>
                             <p>Cedula: </p>
                         </Col>
                         <Col lg={6}>
-                            <p>###-########-#</p>
+                            <p>{user_data['id']}</p>
                         </Col>
                     </Row>
                     <Row>
@@ -235,7 +221,7 @@ const CreditReport = () =>  {
                             <p>Fecha de Nacimiento</p>
                         </Col>
                         <Col lg={6}>
-                            <p>01/01/1990</p>
+                            <p>{new Date(user_data['birth_date']).toLocaleDateString('es-DR')}</p>
                         </Col>
                     </Row>
                     <Row>
@@ -243,7 +229,7 @@ const CreditReport = () =>  {
                             <p>Nacionalidad</p>
                         </Col>
                         <Col lg={6}>
-                            <p>Dominicana</p>
+                            <p>{user_data['nationality']}</p>
                         </Col>
                     </Row>
                     <Row>
@@ -251,7 +237,7 @@ const CreditReport = () =>  {
                             <p>Estado Civil</p>
                         </Col>
                         <Col lg={6}>
-                            <p>Soltero</p>
+                            <p>{user_data['genre'] == 'M' ? "Masculino" : "Femenino"}</p>
                         </Col>
                     </Row>
                 </Col>
@@ -290,7 +276,7 @@ const CreditReport = () =>  {
                             {data['credit_card_dop'].map(x => (
                                 <tr>
                                     <td>{x.name.toUpperCase()}</td>
-                                    <td>{x.card_number_actual}</td>
+                                    <td>{x.card_number}</td>
                                     <td>{new Date(x.open_date).toLocaleDateString('es-DR')}</td>
                                     <td>{new Date(x.last_uploaded_date).toLocaleDateString('es-DR')}</td>
                                     <td>RD</td>
@@ -303,7 +289,7 @@ const CreditReport = () =>  {
                             {data['credit_card_usd'].map(x => (
                                 <tr>
                                     <td>{x.name.toUpperCase()}</td>
-                                    <td>{x.card_number_actual}</td>
+                                    <td>{x.card_number}</td>
                                     <td>{new Date(x.open_date).toLocaleDateString('es-DR')}</td>
                                     <td>{new Date(x.last_uploaded_date).toLocaleDateString('es-DR')}</td>
                                     <td>USD</td>
@@ -457,7 +443,15 @@ acceso no autorizado, fuera de los fines establecidos por la Ley No.172-13, ser√
                             </div>
                             <h2>Historia de credito</h2>
                             <div>
-                                <FontAwesomeIcon icon={faPrint} />
+                                <div style={{ height: "auto", margin: "0 auto", maxWidth: 64, width: "100%" }}>
+                                    <QRCode
+                                    size={256}
+                                    style={{ height: "auto", maxWidth: "100%", width: "100%" }}
+                                    value={"http://aciertaenlinea.com/login"}
+                                    // viewBox={`0 0 256 256`}
+                                    />
+                                </div>
+                                {/* <FontAwesomeIcon icon={faPrint} /> */}
                             </div>
                         </div>
                     </Row>
