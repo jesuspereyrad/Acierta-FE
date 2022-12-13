@@ -247,7 +247,7 @@ const CreditReport = () =>  {
     }
 
 
-
+    // Render
     const renderActiveCreditCard = () => {
         return (
             <Col id="cc_product_information">
